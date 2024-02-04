@@ -4,6 +4,8 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 
 import purchases from './routes/purchases.routes'
+import users from './routes/users.routes'
+import stores from './routes/stores.routes'
 
 export class App{
     private app: Application;
@@ -33,6 +35,8 @@ export class App{
     }
     routes(){
         this.app.use('/api/v1/purchases',purchases)
+        this.app.use('/api/v1/users',users)
+        this.app.use('/api/v1/stores',stores)
     }
     hedears(){
         this.app.use((req, res, next) => {

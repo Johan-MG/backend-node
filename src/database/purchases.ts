@@ -1,9 +1,16 @@
 
 import {pool} from './connection'
 
-export const getUsers = async () =>{
+export const getPurchases = async () =>{
     const query = 'SELECT * FROM jmg.get_purchases()'
     const response = await pool.query(query)
-    pool.end()
+    //pool.end()
     return response.rows;
+}
+
+export const createPurchases = async (purchase:JSON) =>{
+    const query = `SELECT * FROM jmg.create_purchase('${JSON.stringify(purchase)}')`
+    const response = await pool.query(query)
+    //pool.end()
+    return response.rows[0].create_purchase;
 }
