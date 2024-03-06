@@ -3,8 +3,18 @@ import { createPurchases, getPurchases, changeStatusPurchase } from "../database
 
 export async function getDefaultList(req:Request, res: Response): Promise<Response>{
     try{
-
-        const response =  await getPurchases()
+        const start = req.query.start as string
+        const end = req.query.end as string
+        if(start == undefined)
+            return res.status(400).json({
+                message: "start parameter not found"
+            })
+            
+        if(end == undefined)
+            return res.status(400).json({
+                message: "start parameter not found"
+            })
+        const response =  await getPurchases(start, end)
         
         return res.json(response)
     }catch(e){
